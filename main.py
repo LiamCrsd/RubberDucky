@@ -6,4 +6,4 @@ if os.name == "nt":
 else:
   for i in range(10):
     os.system("gnome-terminal -- hollywood")
-    time.sleep(10)
+    time.sleep(0.1)
