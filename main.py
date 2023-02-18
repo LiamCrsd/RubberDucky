@@ -4,4 +4,4 @@ if os.name == "nt":
     os.system("start")
 else:
   for i in range(10):
-    os.system("gnome-terminal")
+    os.system("gnome-terminal -- python3 script3.py")
