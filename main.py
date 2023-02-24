@@ -2,7 +2,7 @@ import os
 import time
 if os.name == "nt":
   for i in range(50):
-    os.system("start tree")
+    os.system("start python script2/script3.py")
     time.sleep(1)
 else:
   for i in range(20):
