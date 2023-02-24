@@ -8,5 +8,5 @@ if os.name == "nt":
     time.sleep(1)
 else:
   for i in range(20):
-    os.system(random.choice(listeCommandeLinux)))
+    os.system(random.choice(listeCommandeLinux))
     time.sleep(1)
