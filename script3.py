@@ -1,2 +1,2 @@
 while true:
-  pass
+  print("Hack en cours")
