@@ -6,3 +6,4 @@ while var:
   var = bool(fic.readline())
   fic.close()
   print("Hack en cours",var)
+print("Echec du Hack")
