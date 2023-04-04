@@ -10,11 +10,16 @@ while True:
 			key, value = line.strip().split(':')
 			dic[key.strip()] = value.strip()
 
-
+	mdp = dic["Mdp"]
+	try:
+		with open("./mdp.txt","r") as f:
+			verify_mdp = f.readline().strip()
+	except:
+		verify_mdp = ""
 	stop_data = dic["Virus_actif"]
 	data = dic["Compteur"]
 	timer = dic["Tic_compteur"]
-	if stop_data == "0":
+	if stop_data == "0" or mdp == verify_mdp:
 		break
 
 	# Afficher la pop-up avec le contenu du fichier de données
