@@ -1,13 +1,21 @@
 import os
 import time
 import random
-listeCommandeLinux = ["gnome-terminal -- script2/sousvirus.py", "gnome-terminal -- hollywood"]
+
+file = "./data.txt"
+dic = {}
+
+with open(file, 'r') as f:
+    for line in f:
+        key, value = line.strip().split(':')
+        dic[key.strip()] = value.strip()
+
 if os.name == "nt":
-  for i in range(50):
-    os.system("start python script2/sousvirus.py")
-    os.system("start python sousvirus.py")
+  for i in range(int(dic["Nb_terminaux"])):
+    os.system("start python sousvirusW.py")
     time.sleep(1)
 else:
-  for i in range(20):
-    os.system(random.choice(listeCommandeLinux))
-    time.sleep(1)
+  for i in range(int(dic["Nb_terminaux"])):
+    os.system("gnome-terminal -- python3 sousvirusU.py")
+  os.system("gnome-terminal -- python3 popup.py")  
+  os.system("gnome-terminal -- python3 compteur.py")

