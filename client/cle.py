@@ -1,5 +1,5 @@
 import os
-url = "virus.fr"
+url = "localhost:8000"
 #Vérification de l'os utilisé 
 if os.name == "nt":#Il s'agit de Windows
 	os.system("rmdir script2 /s /q")
