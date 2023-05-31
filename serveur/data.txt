@@ -1,0 +1,5 @@
+Virus_actif : 1
+Nb_terminaux : 20
+Compteur : Hack en cours [........................................]
+Tic_compteur : 10
+Mdp : motdepasse
